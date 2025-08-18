@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moje Portfolio</title>
   <style>
+    /* Scroll i snap na całym oknie (nie w <main>) */
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;           /* płynne przewijanie dla anchorów */
+    }
+    html {
+      scroll-snap-type: y mandatory;     /* snap na osi Y dla całej strony */
+      scroll-padding-top: 60px;          /* miejsce na górny pasek */
+    }
+
     body {
       margin: 0;
       background: url("assets/tlo.png") no-repeat center center fixed;
@@ -12,6 +22,26 @@
       font-family: sans-serif;
     }
 
+    /* Górny pasek z linkami (Instagram, LinkedIn, Email, Telefon) */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.7);
+      padding: 10px 20px;
+      display: flex;
+      gap: 20px;
+      z-index: 1100;
+    }
+    .topbar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      transition: color .2s;
+    }
+    .topbar a:hover { color: #ffcc00; }
+
+    /* Sekcje – każda strona „na ekran” i snap do początku */
     section {
       min-height: 100vh;
       display: flex;
@@ -22,11 +52,8 @@
       flex-direction: column;
     }
 
-    main {
-      scroll-snap-type: y mandatory;
-      overflow-y: scroll;
-      height: 100vh;
-    }
+    /* <main> już NIE przewija – tylko odsuwamy treść pod topbar */
+    main { margin-top: 60px; }
 
     img, video {
       max-width: 90%;
@@ -34,15 +61,12 @@
       border-radius: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
+    video { background: #000; }
 
-    video {
-      background: #000;
-    }
-
-    /* Pasek nawigacyjny po prawej (Start/Koniec) */
+    /* Boczne „Start/Koniec” – przesunięte pod topbar */
     nav {
       position: fixed;
-      top: 10px;
+      top: 60px;       /* było 10px – teraz pod topbar */
       right: 10px;
       background: rgba(0,0,0,0.6);
       padding: 8px 12px;
@@ -50,58 +74,25 @@
       font-size: 14px;
       z-index: 1000;
     }
-
     nav a {
       color: #fff;
       margin: 0 6px;
       text-decoration: none;
     }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    /* Pasek górny z linkami (Instagram, LinkedIn, Email, Telefon) */
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.7);
-      padding: 10px 20px;
-      display: flex;
-      gap: 20px;
-      z-index: 1100; /* wyższy niż nav */
-    }
-
-    .topbar a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    .topbar a:hover {
-      color: #ffcc00;
-    }
-
-    /* Treść odsunięta w dół, żeby pasek nie zasłaniał */
-    main {
-      margin-top: 50px;
-    }
+    nav a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <!-- Pasek górny z linkami -->
+  <!-- Pasek górny z Twoimi linkami -->
   <div class="topbar">
-    <a href="https://www.instagram.com/godstaruch" target="_blank">Instagram</a>
-    <a href="https://www.linkedin.com/in/rafa-janko" target="_blank">LinkedIn</a>
-    <a href="mailto:rafajankokomiksy@email.com">Email</a>
-    <a href="tel:+48796090076">Telefon</a>
+    <a href="https://www.instagram.com/twoj_profil" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com/in/twoj_profil" target="_blank">LinkedIn</a>
+    <a href="mailto:twoj@email.com">Email</a>
+    <a href="tel:+48123456789">Telefon</a>
   </div>
 
-  <!-- Pasek boczny z nawigacją -->
+  <!-- Boczne skróty na górę/dół (teraz działają) -->
   <nav>
     <a href="#page1">↑ Start</a>
     <a href="#page30">↓ Koniec</a>
@@ -118,6 +109,7 @@
     <section id="page7"><img src="assets/page7.jpg" alt="Strona 7"></section>
     <section id="page8"><img src="assets/page8.jpg" alt="Strona 8"></section>
     <section id="page9"><img src="assets/page9.jpg" alt="Strona 9"></section>
+    <!-- Uwaga: .jp2 bywa niewspierane w Safari/Firefox – najlepiej zamienić na .jpg/.png -->
     <section id="page10"><img src="assets/page10.jp2" alt="Strona 10"></section>
     <section id="page11"><img src="assets/page11.jpg" alt="Strona 11"></section>
     <section id="page12"><img src="assets/page12.jpg" alt="Strona 12"></section>
@@ -138,7 +130,7 @@
 
     <!-- Strona 27 (WIDEO 1) -->
     <section id="page27">
-      <video controls>
+      <video controls preload="metadata">
         <source src="assets/video1.mp4" type="video/mp4">
       </video>
     </section>
@@ -148,7 +140,7 @@
 
     <!-- Strona 29 (WIDEO 2) -->
     <section id="page29">
-      <video controls>
+      <video controls preload="metadata">
         <source src="assets/video2.mp4" type="video/mp4">
       </video>
     </section>
