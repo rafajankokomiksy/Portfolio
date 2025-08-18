@@ -39,6 +39,7 @@
       background: #000;
     }
 
+    /* Pasek nawigacyjny po prawej (Start/Koniec) */
     nav {
       position: fixed;
       top: 10px;
@@ -59,10 +60,48 @@
     nav a:hover {
       text-decoration: underline;
     }
+
+    /* Pasek górny z linkami (Instagram, LinkedIn, Email, Telefon) */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.7);
+      padding: 10px 20px;
+      display: flex;
+      gap: 20px;
+      z-index: 1100; /* wyższy niż nav */
+    }
+
+    .topbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .topbar a:hover {
+      color: #ffcc00;
+    }
+
+    /* Treść odsunięta w dół, żeby pasek nie zasłaniał */
+    main {
+      margin-top: 50px;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Pasek górny z linkami -->
+  <div class="topbar">
+    <a href="https://www.instagram.com/godstaruch" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com/in/rafa-janko" target="_blank">LinkedIn</a>
+    <a href="mailto:rafajankokomiksy@email.com">Email</a>
+    <a href="tel:+48796090076">Telefon</a>
+  </div>
+
+  <!-- Pasek boczny z nawigacją -->
   <nav>
     <a href="#page1">↑ Start</a>
     <a href="#page30">↓ Koniec</a>
